@@ -2,21 +2,8 @@
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Translate(string filePath)
         {
-            if (args.Length < 1)
-            {
-                Console.WriteLine("Usage: MlogCompiler <input_file>");
-                return;
-            }
-
-            string filePath = args[0];
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine($"File not found: {filePath}");
-                return;
-            }
-
             try
             {
                 string source = File.ReadAllText(filePath);
@@ -47,6 +34,31 @@
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        static void Main(string[] args)
+        {
+            if (args.Length < 1)
+            {
+                Console.WriteLine("Usage: MlogCompiler <input_file>");
+
+                if (File.Exists("test.high"))
+                {
+                    Console.WriteLine("Found test file! Translating...");
+                    Translate("test.high");
+                }
+                return;
+            }
+
+            string filePath = args[0];
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"File not found: {filePath}");
+                return;
+            }
+
+            Translate(filePath);
+            
             Console.ReadKey();
         }
     }
