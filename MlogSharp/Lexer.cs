@@ -74,6 +74,8 @@ namespace MlogSharp
                         break;
                     case '(': tokens.Add(new Token(TokenType.OpenParen, "(", _line)); break;
                     case ')': tokens.Add(new Token(TokenType.CloseParen, ")", _line)); break;
+                    case '[': tokens.Add(new Token(TokenType.OpenBracket, "[", _line)); break;
+                    case ']': tokens.Add(new Token(TokenType.CloseBracket, "]", _line)); break;
                     case '{': tokens.Add(new Token(TokenType.OpenBrace, "{", _line)); break;
                     case '}': tokens.Add(new Token(TokenType.CloseBrace, "}", _line)); break;
                     case ',': tokens.Add(new Token(TokenType.Comma, ",", _line)); break;
@@ -149,6 +151,10 @@ namespace MlogSharp
                 "else" => TokenType.Else,
                 "while" => TokenType.While,
                 "for" => TokenType.For,
+<<<<<<< проект-обзор-и-анализ-4601b
+                "array" => TokenType.Array,
+=======
+>>>>>>> master
                 _ => TokenType.Identifier
             };
             return new Token(type, text, _line);

@@ -8,9 +8,16 @@ namespace MlogSharp
         Number, Identifier, StringLiteral,
         Plus, Minus, Star, Slash, Equals,
         OpenParen, CloseParen, OpenBrace, CloseBrace,
+<<<<<<< проект-обзор-и-анализ-4601b
+        OpenBracket, CloseBracket,
+        Comma, Semicolon,
+        EqualEqual, NotEqual, LessThan, GreaterThan, LessThanEq, GreaterThanEq,
+        Function, Return, Print, If, Else, While, For, AsmBlock, Array,
+=======
         Comma, Semicolon,
         EqualEqual, NotEqual, LessThan, GreaterThan, LessThanEq, GreaterThanEq,
         Function, Return, Print, If, Else, While, For, AsmBlock,
+>>>>>>> master
         EndOfFile
     }
 

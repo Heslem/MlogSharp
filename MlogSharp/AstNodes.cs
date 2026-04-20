@@ -106,6 +106,32 @@ namespace MlogSharp
         public AsmBlockStatement(string rawCode) => RawCode = rawCode;
     }
 
+    public class ArrayDeclaration : Statement
+    {
+        public string Name { get; }
+        public Expression Size { get; }
+        public string CellName { get; }
+        public ArrayDeclaration(string name, Expression size, string cellName) =>
+            (Name, Size, CellName) = (name, size, cellName);
+    }
+
+    public class ArrayAccessExpression : Expression
+    {
+        public string ArrayName { get; }
+        public Expression Index { get; }
+        public ArrayAccessExpression(string arrayName, Expression index) =>
+            (ArrayName, Index) = (arrayName, index);
+    }
+
+    public class ArrayAssignmentStatement : Statement
+    {
+        public string ArrayName { get; }
+        public Expression Index { get; }
+        public Expression Value { get; }
+        public ArrayAssignmentStatement(string arrayName, Expression index, Expression value) =>
+            (ArrayName, Index, Value) = (arrayName, index, value);
+    }
+
     public class ProgramNode : AstNode
     {
         public List<Statement> Statements { get; }

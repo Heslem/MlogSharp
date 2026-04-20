@@ -60,6 +60,10 @@ namespace MlogSharp
             if (Current.Type == TokenType.While) return ParseWhileStatement();
             if (Current.Type == TokenType.For) return ParseForStatement();
             if (Current.Type == TokenType.AsmBlock) { var asm = new AsmBlockStatement(Current.Text); Advance(); return asm; }
+<<<<<<< проект-обзор-и-анализ-4601b
+            if (Current.Type == TokenType.Array) return ParseArrayDeclaration();
+=======
+>>>>>>> master
             var expr = ParseExpression();
             if (Current.Type == TokenType.Semicolon) Advance();
             return new ExpressionStatement(expr);
@@ -148,6 +152,25 @@ namespace MlogSharp
             return new ReturnStatement(expr);
         }
 
+<<<<<<< проект-обзор-и-анализ-4601b
+        private ArrayDeclaration ParseArrayDeclaration()
+        {
+            Expect(TokenType.Array);
+            string name = Current.Text;
+            Expect(TokenType.Identifier);
+            Expect(TokenType.OpenParen);
+            var size = ParseExpression();
+            Expect(TokenType.Comma);
+            string cellName = Current.Text;
+            Expect(TokenType.Identifier);
+            Expect(TokenType.CloseParen);
+            if (Current.Type == TokenType.Semicolon) Advance();
+            return new ArrayDeclaration(name, size, cellName);
+        }
+=======
+        private Expression ParseExpression() => ParseAssignment();
+>>>>>>> master
+
         private Expression ParseExpression() => ParseAssignment();
 
         private Expression ParseAssignment()
@@ -155,9 +178,18 @@ namespace MlogSharp
             var left = ParseAddition();
             if (Current.Type == TokenType.Equals)
             {
+<<<<<<< проект-обзор-и-анализ-4601b
+                Advance();
+                var right = ParseAssignment();
+                if (left is ArrayAccessExpression arrAccess)
+                    return new ArrayAssignmentStatement(arrAccess.ArrayName, arrAccess.Index, right);
+                if (left is not VariableReference vr) throw new Exception("Left side of assignment must be a variable or array access");
+                return new Assignment(vr.Name, right);
+=======
                 if (left is not VariableReference vr) throw new Exception("Left side of assignment must be a variable");
                 Advance();
                 return new Assignment(vr.Name, ParseAssignment());
+>>>>>>> master
             }
             return left;
         }
@@ -221,6 +253,16 @@ namespace MlogSharp
                     Expect(TokenType.CloseParen);
                     return new FunctionCall(name, args);
                 }
+<<<<<<< проект-обзор-и-анализ-4601b
+                if (Current.Type == TokenType.OpenBracket)
+                {
+                    Advance();
+                    var index = ParseExpression();
+                    Expect(TokenType.CloseBracket);
+                    return new ArrayAccessExpression(name, index);
+                }
+=======
+>>>>>>> master
                 return new VariableReference(name);
             }
             throw new Exception($"Unexpected token in Primary: {Current.Type} ('{Current.Text}') at line {Current.Line}");

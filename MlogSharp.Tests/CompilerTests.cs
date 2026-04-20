@@ -50,6 +50,20 @@ public class LexerTests
         Assert.Equal(TokenType.Identifier, tokens[1].Type);
         Assert.Equal("y", tokens[1].Text);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
+
+    [Fact]
+    public void Tokenize_Brackets()
+    {
+        var tokens = new Lexer("arr[0]").Tokenize();
+        Assert.Equal(TokenType.Identifier, tokens[0].Type);
+        Assert.Equal("arr", tokens[0].Text);
+        Assert.Equal(TokenType.OpenBracket, tokens[1].Type);
+        Assert.Equal(TokenType.Number, tokens[2].Type);
+        Assert.Equal(TokenType.CloseBracket, tokens[3].Type);
+    }
+=======
+>>>>>>> master
 }
 
 public class ParserTests
@@ -96,6 +110,37 @@ public class ParserTests
         var whileStmt = Assert.IsType<WhileStatement>(ast.Statements[0]);
         Assert.IsType<BinaryOperation>(whileStmt.Condition);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
+
+    [Fact]
+    public void Parse_ArrayAccess()
+    {
+        var ast = new Parser(new Lexer("x = arr[5];").Tokenize()).Parse();
+        var stmt = Assert.IsType<Parser.ExpressionStatement>(ast.Statements[0]);
+        var assign = Assert.IsType<Assignment>(stmt.Expr);
+        var arrAccess = Assert.IsType<ArrayAccessExpression>(assign.Value);
+        Assert.Equal("arr", arrAccess.ArrayName);
+    }
+
+    [Fact]
+    public void Parse_ArrayDeclaration()
+    {
+        var ast = new Parser(new Lexer("array nums(10, cell1);").Tokenize()).Parse();
+        var decl = Assert.IsType<ArrayDeclaration>(ast.Statements[0]);
+        Assert.Equal("nums", decl.Name);
+        Assert.Equal("cell1", decl.CellName);
+    }
+
+    [Fact]
+    public void Parse_ArrayAssignment()
+    {
+        var ast = new Parser(new Lexer("nums[0] = 100;").Tokenize()).Parse();
+        var stmt = Assert.IsType<Parser.ExpressionStatement>(ast.Statements[0]);
+        var arrAssign = Assert.IsType<ArrayAssignmentStatement>(stmt.Expr);
+        Assert.Equal("nums", arrAssign.ArrayName);
+    }
+=======
+>>>>>>> master
 }
 
 public class CompilerTests
@@ -150,4 +195,58 @@ public class CompilerTests
         var result = new Compiler().Compile(ast);
         Assert.EndsWith("\nend", result);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
+
+    [Fact]
+    public void Compile_ArrayDeclaration_NoCode()
+    {
+        var ast = new Parser(new Lexer("array nums(10, cell1);").Tokenize()).Parse();
+        var result = new Compiler().Compile(ast);
+        Assert.DoesNotContain("write", result);
+        Assert.DoesNotContain("read", result);
+    }
+
+    [Fact]
+    public void Compile_ArrayAssignment_StaticIndex()
+    {
+        var ast = new Parser(new Lexer("array nums(10, cell1); nums[0] = 100;").Tokenize()).Parse();
+        var result = new Compiler().Compile(ast);
+        Assert.Contains("write 100 nums 0", result);
+    }
+
+    [Fact]
+    public void Compile_ArrayAccess_Read()
+    {
+        var ast = new Parser(new Lexer("array nums(10, cell1); x = nums[5];").Tokenize()).Parse();
+        var result = new Compiler().Compile(ast);
+        Assert.Contains("read", result);
+        Assert.Contains("nums", result);
+    }
+
+    [Fact]
+    public void Compile_ArrayAssignment_DynamicIndex()
+    {
+        var ast = new Parser(new Lexer("array nums(10, cell1); i = 3; nums[i] = 50;").Tokenize()).Parse();
+        var result = new Compiler().Compile(ast);
+        Assert.Contains("write 50 nums", result);
+    }
+
+    [Fact]
+    public void Compile_ArrayReadWriteCycle()
+    {
+        var code = @"
+array nums(10, cell1);
+for (i = 0; i < 5; i = i + 1) {
+    nums[i] = i * 10;
+}
+x = nums[2];
+";
+        var ast = new Parser(new Lexer(code).Tokenize()).Parse();
+        var result = new Compiler().Compile(ast);
+        Assert.Contains("write", result);
+        Assert.Contains("read", result);
+        Assert.Contains("op mul", result);
+    }
+=======
+>>>>>>> master
 }
