@@ -151,7 +151,10 @@ namespace MlogSharp
                 "else" => TokenType.Else,
                 "while" => TokenType.While,
                 "for" => TokenType.For,
+<<<<<<< проект-обзор-и-анализ-4601b
                 "array" => TokenType.Array,
+=======
+>>>>>>> master
                 _ => TokenType.Identifier
             };
             return new Token(type, text, _line);

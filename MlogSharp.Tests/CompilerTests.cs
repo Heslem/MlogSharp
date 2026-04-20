@@ -50,6 +50,7 @@ public class LexerTests
         Assert.Equal(TokenType.Identifier, tokens[1].Type);
         Assert.Equal("y", tokens[1].Text);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
 
     [Fact]
     public void Tokenize_Brackets()
@@ -61,6 +62,8 @@ public class LexerTests
         Assert.Equal(TokenType.Number, tokens[2].Type);
         Assert.Equal(TokenType.CloseBracket, tokens[3].Type);
     }
+=======
+>>>>>>> master
 }
 
 public class ParserTests
@@ -107,6 +110,7 @@ public class ParserTests
         var whileStmt = Assert.IsType<WhileStatement>(ast.Statements[0]);
         Assert.IsType<BinaryOperation>(whileStmt.Condition);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
 
     [Fact]
     public void Parse_ArrayAccess()
@@ -135,6 +139,8 @@ public class ParserTests
         var arrAssign = Assert.IsType<ArrayAssignmentStatement>(stmt.Expr);
         Assert.Equal("nums", arrAssign.ArrayName);
     }
+=======
+>>>>>>> master
 }
 
 public class CompilerTests
@@ -189,6 +195,7 @@ public class CompilerTests
         var result = new Compiler().Compile(ast);
         Assert.EndsWith("\nend", result);
     }
+<<<<<<< проект-обзор-и-анализ-4601b
 
     [Fact]
     public void Compile_ArrayDeclaration_NoCode()
@@ -240,4 +247,6 @@ x = nums[2];
         Assert.Contains("read", result);
         Assert.Contains("op mul", result);
     }
+=======
+>>>>>>> master
 }

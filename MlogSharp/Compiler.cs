@@ -47,8 +47,11 @@ namespace MlogSharp
                 case IfStatement ifStmt: GenerateIf(ifStmt, _instructions, null); break;
                 case WhileStatement whileStmt: GenerateWhile(whileStmt, _instructions, null); break;
                 case ForStatement forStmt: GenerateFor(forStmt, _instructions, null); break;
+<<<<<<< проект-обзор-и-анализ-4601b
                 case ArrayDeclaration arrayDecl: GenerateArrayDeclaration(arrayDecl); break;
                 case ArrayAssignmentStatement arrayAssign: GenerateArrayAssignment(arrayAssign); break;
+=======
+>>>>>>> master
                 case Parser.ExpressionStatement exprStmt: GenerateExpression(exprStmt.Expr, _instructions, null); break;
                 default: throw new Exception($"Unknown statement: {node.GetType()}");
             }
@@ -103,8 +106,11 @@ namespace MlogSharp
                 case IfStatement ifStmt: GenerateIf(ifStmt, target, map); break;
                 case WhileStatement whileStmt: GenerateWhile(whileStmt, target, map); break;
                 case ForStatement forStmt: GenerateFor(forStmt, target, map); break;
+<<<<<<< проект-обзор-и-анализ-4601b
                 case ArrayDeclaration arrayDecl: GenerateArrayDeclaration(arrayDecl); break;
                 case ArrayAssignmentStatement arrayAssign: GenerateArrayAssignment(arrayAssign); break;
+=======
+>>>>>>> master
                 case Parser.ExpressionStatement exprStmt: GenerateExpression(exprStmt.Expr, target, map); break;
                 case AsmBlockStatement asm:
                     foreach (var line in asm.RawCode.Split(new[] { ';', '\n' }, StringSplitOptions.RemoveEmptyEntries))
@@ -132,7 +138,10 @@ namespace MlogSharp
                 NumberLiteral num => num.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
                 StringLiteral str => $"\"{str.Value}\"",
                 VariableReference vr => map.ContainsKey(vr.Name) ? map[vr.Name] : vr.Name,
+<<<<<<< проект-обзор-и-анализ-4601b
                 ArrayAccessExpression arrAccess => HandleArrayAccess(arrAccess, target, map),
+=======
+>>>>>>> master
                 Assignment assign => HandleAssignment(assign, target, map),
                 BinaryOperation bin when IsComparison(bin.Operator) => GenerateComparison(bin, target, map),
                 BinaryOperation bin => HandleArithmetic(bin, target, map),
@@ -147,6 +156,7 @@ namespace MlogSharp
             target.Add($"set {assign.VariableName} {val}");
             return assign.VariableName;
         }
+<<<<<<< проект-обзор-и-анализ-4601b
 
         private void GenerateArrayDeclaration(ArrayDeclaration arrayDecl)
         {
@@ -169,6 +179,8 @@ namespace MlogSharp
             target.Add($"read {resultVar} {arrAccess.ArrayName} {index}");
             return resultVar;
         }
+=======
+>>>>>>> master
 
         private string HandleArithmetic(BinaryOperation bin, List<string> target, Dictionary<string, string> map)
         {

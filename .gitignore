@@ -5,13 +5,18 @@ obj/
 *.dll
 *.exe
 *.pdb
+<<<<<<< проект-обзор-и-анализ-4601b
 *.so
 *.dylib
 *.jar
+=======
+*.nupkg
+>>>>>>> master
 
 # Dependencies
 packages/
 node_modules/
+<<<<<<< проект-обзор-и-анализ-4601b
 .nuget/
 .nyc_output/
 coverage/
@@ -50,4 +55,27 @@ coverage.xml
 *.xz
 *.7z
 *.rar
+=======
+vendor/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Temporary files
+*.tmp
+*.temp
+>>>>>>> master
 ```
